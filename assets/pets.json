@@ -1,5 +1,4 @@
-{
-    "list": [{
+[{
         "id": 517208125246,
         "color": "black-white",
         "price": "110.00",
@@ -8,7 +7,7 @@
         "id": 503723267566,
         "color": "black-white",
         "price": "1.4",
-        "isFluffy": true
+        "isFluffy": "long"
     }, {
         "id": 1298144584210,
         "color": "white",
@@ -53,4 +52,3 @@
         "price": "1.89",
         "isFluffy": "long"
     }]
-}
