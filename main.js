@@ -1,14 +1,16 @@
-import {PetShop} from"./model/petShop.model.js";
-import {Banner} from"./view/banner.view.js";
-import {DogCategory} from"./view/categoryDogs.view.js";
-import {CatCategory} from"./view/categoryCat.view.js";
-import {HamsterCategory} from"./view/categoryHamster.view.js";
+import {PetShop} from "./model/petShop.model.js";
+import {Banner} from "./view/banner.view.js";
+import {DogCategory} from "./view/categoryDogs.view.js";
+import {CatCategory} from "./view/categoryCat.view.js";
+import {HamsterCategory} from "./view/categoryHamster.view.js";
+import {FormView} from "./view/form.view.js";
 
 const banner = new Banner;
 const petShop = new PetShop;
 const dogCategory = new DogCategory;
 const catCategory = new CatCategory;
 const hamsterCategory = new HamsterCategory;
+const formView = new FormView;
 const container = document.querySelector('.viewContainer');
 const cartButton = document.querySelector('button.cart');
 const cartClose = document.querySelector('button.cart-over');
@@ -17,23 +19,42 @@ const cats = document.querySelectorAll('.navigation button')[1];
 const hamsters = document.querySelectorAll('.navigation button')[2];
 const newAnimal = document.querySelectorAll('.navigation button')[3];
 
-cartButton.addEventListener('click',()=>document.querySelector('.overlay').classList.toggle('invis'));
-cartClose.addEventListener('click',()=>document.querySelector('.overlay').classList.toggle('invis'));
-dogs.addEventListener('click',()=>{changeContainerView(dogCategory.render())});
-cats.addEventListener('click',()=>{changeContainerView(catCategory.render())});
-hamsters.addEventListener('click',()=>{changeContainerView(hamsterCategory.render())});
+cartButton.addEventListener('click', () => document.querySelector('.overlay').classList.toggle('invis'));
+cartClose.addEventListener('click', () => document.querySelector('.overlay').classList.toggle('invis'));
+dogs.addEventListener('click', () => {
+  changeContainerView(dogCategory.render())
+});
+cats.addEventListener('click', () => {
+  changeContainerView(catCategory.render())
+});
+hamsters.addEventListener('click', () => {
+  changeContainerView(hamsterCategory.render())
+});
+newAnimal.addEventListener('click', () => {
+  changeContainerView(formView.render())
+});
+container.addEventListener('click', (e) => {
+  if (e.target.getAttribute('data-send') === 'close') {
+    banner.render();
+    container.innerHTML = '';
+  }
+})
 
 
 window.onload = pageOnLoad;
-function pageOnLoad(){
+
+function pageOnLoad() {
   petShop.getList();
-  if(sessionStorage.getItem('allPets')){
+  if (sessionStorage.getItem('allPets')) {
     banner.render();
-  }else{setTimeout(()=>{
-    petShop.getList();banner.render();},200)
+  } else {
+    setTimeout(() => {
+      petShop.getList();
+      banner.render();
+    }, 200)
   }
 }
 
-function changeContainerView(par){
-container.childNodes[0] ? container.replaceChild(par,container.childNodes[0]) : container.appendChild(par);
+function changeContainerView(par) {
+  container.childNodes[0] ? container.replaceChild(par, container.childNodes[0]) : container.appendChild(par);
 }

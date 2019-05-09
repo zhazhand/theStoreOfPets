@@ -1,18 +1,6 @@
 import {ItemController} from "../controller/item.controller.js"
 
 const itemController = new ItemController;
-/* const template = `<div class="card">
-<div class="card-header">
-  Type of pet:<span class="typeOfPet pl-2">${item.type}</span>
-</div>
-<div class="card-body">
-  <h5 class="card-title">Name:<span class="petName pl-1">${item.name}</span></h5>
-  <p class="card-text">Color:<span class="petColor pl-1">${item.color}</span></p>
-  <p class="card-text">Fur:<span class="petFur pl-1">${item.fluffy}</span></p>
-  <p class="card-text">Cost:<span class="petCost pl-1">${item.price}</span></p>
-  <button class="btn btn-primary candidateForBuying" data-id="${item.id}">buy me</button>
-</div>
-</div>`; */
 
 export class ItemView {
 
