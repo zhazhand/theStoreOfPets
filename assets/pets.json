@@ -15,7 +15,7 @@
         "isFluffy": "middle"
     }, {
         "id": 1365679109383,
-        "color": "yellow-rwd",
+        "color": "yellow-red",
         "price": "500",
         "name": "Jerry"
     }, {
@@ -51,4 +51,9 @@
         "color": "yellow",
         "price": "1.89",
         "isFluffy": "long"
-    }]
+    }, {
+      "id": 1084479370221,
+      "color": "golden",
+      "price": "79",
+      "isFluffy": "long"
+  }]
