@@ -17,6 +17,11 @@ cartClose.addEventListener('click',()=>document.querySelector('.overlay').classL
 window.onload = pageOnLoad;
 function pageOnLoad(){
   petShop.getList();
-  banner.render();
+  if(sessionStorage.getItem('allPets')){
+    banner.render();
+  }else{setTimeout(()=>{
+    petShop.getList();banner.render();},200)
+  }
+  
 }
 

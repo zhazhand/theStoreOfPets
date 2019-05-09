@@ -10,8 +10,11 @@ export class Banner{
   }
 
   render(){
+    this.catsContainer.innerHTML = '';
     this.catsContainer.appendChild(this.getCats());
+    this.greaterThanAverageContainer.innerHTML = '';
     this.greaterThanAverageContainer.appendChild(this.getGreaterThenAverage());
+    this.fluffyOrWhiteContainer.innerHTML = '';
     this.fluffyOrWhiteContainer.appendChild(this.getFluffyOrWhite());
   }
 
