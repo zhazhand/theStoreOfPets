@@ -1,4 +1,4 @@
-export class DogController {
+export class HamsterController {
   
   define(){
     this.animals = JSON.parse(sessionStorage.getItem('allPets'));
@@ -6,7 +6,7 @@ export class DogController {
   }
 
   getItems(array) {
-    let dogs = array.filter(elem => !elem.isFluffy && elem.name);
-    return dogs;
+    let hamsters = array.filter(elem => elem.isFluffy && !elem.name);
+    return hamsters;
   }
 }
