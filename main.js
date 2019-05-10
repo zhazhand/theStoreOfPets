@@ -4,14 +4,18 @@ import {DogCategory} from "./view/categoryDogs.view.js";
 import {CatCategory} from "./view/categoryCat.view.js";
 import {HamsterCategory} from "./view/categoryHamster.view.js";
 import {FormView} from "./view/form.view.js";
+import {CartView} from "./view/cart.view.js";
 
 const banner = new Banner;
 const petShop = new PetShop;
+const cartView = new CartView;
 const dogCategory = new DogCategory;
 const catCategory = new CatCategory;
 const hamsterCategory = new HamsterCategory;
 const formView = new FormView;
 const container = document.querySelector('.viewContainer');
+const cartContainer = document.querySelector('.cartContainer');
+const cartScore = document.querySelector('.score');
 const cartButton = document.querySelector('button.cart');
 const cartClose = document.querySelector('button.cart-over');
 const dogs = document.querySelectorAll('.navigation button')[0];
@@ -19,8 +23,8 @@ const cats = document.querySelectorAll('.navigation button')[1];
 const hamsters = document.querySelectorAll('.navigation button')[2];
 const newAnimal = document.querySelectorAll('.navigation button')[3];
 
-cartButton.addEventListener('click', () => document.querySelector('.overlay').classList.toggle('invis'));
-cartClose.addEventListener('click', () => document.querySelector('.overlay').classList.toggle('invis'));
+cartButton.addEventListener('click', () => hideAndShowCart());
+cartClose.addEventListener('click', () => hideAndShowCart());
 dogs.addEventListener('click', () => {
   changeContainerView(dogCategory.render())
 });
@@ -34,10 +38,10 @@ newAnimal.addEventListener('click', () => {
   changeContainerView(formView.render())
 });
 container.addEventListener('click', (e) => {
-  if (e.target.getAttribute('data-send') === 'close') {
-    banner.render();
-    container.innerHTML = '';
-  }
+  watchAttributes(e);
+})
+cartContainer.addEventListener('click', (e) => {
+  watchCart(e);
 })
 
 
@@ -57,4 +61,42 @@ function pageOnLoad() {
 
 function changeContainerView(par) {
   container.childNodes[0] ? container.replaceChild(par, container.childNodes[0]) : container.appendChild(par);
+}
+
+function watchAttributes(e){
+  if(e.target.getAttribute('data-send') === 'close'){
+    banner.render();
+    container.innerHTML = '';
+  }
+  if(e.target.getAttribute('try-buy') === 'yes'){
+    banner.render();
+    increaseCart();
+    cartContainer.children[0] ? cartContainer.replaceChild(cartView.render(),cartContainer.children[0]) : cartContainer.appendChild(cartView.render());
+    container.innerHTML = '';
+  }
+}
+
+function watchCart(e){
+  if(e.target.getAttribute('data-sold') === 'yes'){
+    cartScore.innerText = '';
+    hideAndShowCart();
+    e.target.parentElement.parentElement.firstElementChild.innerHTML = '';
+  }
+  if(e.target.getAttribute('data-cancel') === 'yes'){
+    cartScore.innerText = '';
+    hideAndShowCart();
+    e.target.parentElement.parentElement.firstElementChild.innerHTML = '';
+    banner.render();
+  }
+}
+
+function increaseCart(){
+    let score = cartScore.innerText;
+    score = +score + 1; 
+    cartScore.innerText = score;
+    return score;
+}
+
+function hideAndShowCart(){
+  document.querySelector('.overlay').classList.toggle('invis')
 }

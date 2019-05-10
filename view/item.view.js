@@ -16,11 +16,33 @@ export class ItemView {
     if (element.isFluffy){
       str += `<p class="card-text">Fur: ${element.isFluffy}</p>`;
     }
-    str+= `<p class="card-text">Cost: ${element.price}$</p>
-    <button class="btn btn-primary candidateForBuying" data-id="${element.id}">buy me</button></div>`;
+    str+= `<p class="card-text">Cost: ${element.price}$</p></div>`;
+    let button = document.createElement('button');
     card.innerHTML = str;
+    button.innerText = 'buy me';
+    button.setAttribute('class', 'btn btn-primary');
+    button.setAttribute('try-buy', 'no');
+    button.addEventListener('click', (e) => {this.tryBuy(element, e)});
+    card.lastChild.appendChild(button);
+
     return card;
   }
 
+  tryBuy(elem, e){
+    let arrayOfPets = JSON.parse(sessionStorage.getItem('allPets'));
+    let arrayCandidates = JSON.parse(sessionStorage.getItem('candidatesForBuying')) ? JSON.parse(sessionStorage.getItem('candidatesForBuying')) : [];
+    let index;
+    for (let i = 0; i < arrayOfPets.length; i++) {
+      let item = arrayOfPets[i];
+      if(item.id === elem.id){
+        index = i;
+      }
+    }
+    arrayCandidates.push(elem);
+    sessionStorage.setItem('candidatesForBuying', JSON.stringify(arrayCandidates));
+    arrayOfPets.splice(index,1);
+    sessionStorage.setItem('allPets', JSON.stringify(arrayOfPets));
+    e.target.setAttribute('try-buy', 'yes'); 
+  }
   
 }
