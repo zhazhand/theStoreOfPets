@@ -33,7 +33,7 @@ export class Helper {
     let label = document.createElement('label');
     label.setAttribute('class','col-3 offset-1 control-label');
     label.setAttribute('for',forAttr);
-    label.innerText = str;
+    label.innerHTML = `${str}<span class="text-danger">*<span>`;
     element.appendChild(label);
     let div = document.createElement('div');
     div.classList.add('col-5');

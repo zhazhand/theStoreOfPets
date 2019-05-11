@@ -1,69 +1,39 @@
-import { PetShop } from "./model/petShop.model.js";
+import { MainController } from "./controller/mainController.js";
 import { Banner } from "./view/banner.view.js";
-import { DogCategory } from "./view/categoryDogs.view.js";
-import { CatCategory } from "./view/categoryCat.view.js";
-import { HamsterCategory } from "./view/categoryHamster.view.js";
-import { FormView } from "./view/form.view.js";
 import { CartView } from "./view/cart.view.js";
 
 const banner = new Banner;
-const petShop = new PetShop;
 const cartView = new CartView;
-const dogCategory = new DogCategory;
-const catCategory = new CatCategory;
-const hamsterCategory = new HamsterCategory;
-const formView = new FormView;
+const mainController = new MainController;
 const container = document.querySelector('.viewContainer');
 const cartContainer = document.querySelector('.cartContainer');
-const cartScore = document.querySelector('.score');
 const cartButton = document.querySelector('button.cart');
 const cartClose = document.querySelector('button.cart-over');
-const dogs = document.querySelectorAll('.navigation button')[0];
-const cats = document.querySelectorAll('.navigation button')[1];
-const hamsters = document.querySelectorAll('.navigation button')[2];
-const newAnimal = document.querySelectorAll('.navigation button')[3];
+const overlay = document.querySelector('.overlay');
+let navigation = document.querySelectorAll('.navigation button');
 
-cartButton.addEventListener('click', () => hideAndShowCart());
-cartClose.addEventListener('click', () => hideAndShowCart());
-dogs.addEventListener('click', () => {
-  changeContainerView(dogCategory.render())
-});
-cats.addEventListener('click', () => {
-  changeContainerView(catCategory.render())
-});
-hamsters.addEventListener('click', () => {
-  changeContainerView(hamsterCategory.render())
-});
-newAnimal.addEventListener('click', () => {
-  changeContainerView(formView.render())
-});
-container.addEventListener('click', (e) => {
+for (let i = 0; i < navigation.length; i++) {
+  navigation[i].addEventListener('click', () => {mainController.changeView(i)});
+}
+
+cartButton.addEventListener('click', () => {mainController.showCart(overlay)});
+cartClose.addEventListener('click', () => {mainController.closeCart(overlay)});
+
+/* container.addEventListener('click', (e) => {
   watchAttributes(e);
 })
 cartContainer.addEventListener('click', (e) => {
   watchCart(e);
 })
-
+ */
 
 window.onload = pageOnLoad;
 
 function pageOnLoad() {
-  petShop.getList();
-  if (sessionStorage.getItem('allPets')) {
-    banner.render();
-  } else {
-    setTimeout(() => {
-      petShop.getList();
-      banner.render();
-    }, 200)
-  }
+  mainController.bannerRender();
 }
 
-function changeContainerView(par) {
-  container.childNodes[0] ? container.replaceChild(par, container.childNodes[0]) : container.appendChild(par);
-}
-
-function watchAttributes(e){
+/* function watchAttributes(e){
   if(e.target.getAttribute('data-send') === 'close'){
     banner.render();
     container.innerHTML = '';
@@ -97,13 +67,6 @@ function watchCart(e){
   }
 }
 
-function increaseCart(){
-    let score = cartScore.innerText;
-    score = +score + 1; 
-    cartScore.innerText = score;
-    return score;
-}
-
 function hideAndShowCart(){
   document.querySelector('.overlay').classList.toggle('invis')
-}
+} */

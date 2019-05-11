@@ -3,8 +3,16 @@ import { CartController } from "../controller/cart.controller.js"
 const cartController = new CartController;
 
 export class CartView {
+constructor(){
+  this.container = document.querySelector('.cartContainer');
+}
+
   render(){
     const array = cartController.getAll();
+    let mainDiv = document.createElement('div');
+    if (array.length === 0){
+      return this.container.innerHtml = '';
+    }
     let button = document.createElement('button');
     button.setAttribute('class', 'delItem h-100');
     let img = document.createElement('img'); 
@@ -23,44 +31,26 @@ export class CartView {
         li.innerText = `${i + 1}. Cat: ${array[i].color}, name - ${array[i].name}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
       }
       let but = button.cloneNode(true);
-      but.children[0].setAttribute('data-cancel-one', 'no');
-      but.children[0].addEventListener('click', (e) => {this.deleteOne(e, array[i])})
+      but.children[0].addEventListener('click', (e) => {cartController.cancelOne(e, array[i].id)})
       li.appendChild(but);
       ul.appendChild(li);
     }
-    let mainDiv = document.createElement('div');
     mainDiv.appendChild(ul);
     let div = document.createElement('div');
     div.setAttribute('class', 'd-flex justify-content-between pt-2');
     let but1 = document.createElement('button');
     but1.innerText = 'confirm';
     but1.setAttribute('class', 'btn btn-primary btn-sm');
-    but1.setAttribute('data-sold', 'no');
-    but1.addEventListener('click', (e) => {this.confirm(e)})
+    but1.addEventListener('click', () => {cartController.confirmBuying()})
     div.appendChild(but1);
     let but2 = document.createElement('button');
     but2.innerText = 'cancel';
     but2.setAttribute('class', 'btn btn-danger btn-sm');
-    but2.setAttribute('data-cancel', 'no');
-    but2.addEventListener('click', (e) => {this.cancel(e)})
+    but2.addEventListener('click', () => {cartController.cancelBuying()})
     div.appendChild(but2);
     mainDiv.appendChild(div);
-    return mainDiv;
+    return this.container.appendChild(mainDiv);
   }
 
-  confirm(e){
-    cartController.confirmBuying();
-    e.target.setAttribute('data-sold', 'yes');
-  }
-
-  cancel(e){
-    cartController.cancelBuying();
-    e.target.setAttribute('data-cancel', 'yes');
-  }
-
-  deleteOne(e, element){
-    cartController.cancelOne(element);
-    e.target.setAttribute('data-cancel-one', 'yes');
-  }
 }
 
