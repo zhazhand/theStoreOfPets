@@ -1,4 +1,4 @@
-import {Pet} from './pet.model.js';
+import { Pet } from './pet.model.js';
 
 export class Dog extends Pet {
   constructor(color, price, name) {

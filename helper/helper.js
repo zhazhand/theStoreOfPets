@@ -8,6 +8,17 @@ export class Helper {
     return sum / len;
   }
 
+  findIndex(arr, element){
+    let index;
+    for (let i = 0; i < arr.length; i++) {
+      let item = arr[i];
+      if(item.id === element.id){
+        index = i;
+      }
+    }
+    return index;
+  }
+
   createInput(plchd, elId){
     let element = document.createElement('input');
     element.classList.add('form-control');

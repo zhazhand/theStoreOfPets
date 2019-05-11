@@ -1,4 +1,4 @@
-import {ItemController} from "../controller/item.controller.js"
+import { ItemController } from "../controller/item.controller.js"
 
 const itemController = new ItemController;
 

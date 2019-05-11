@@ -1,4 +1,4 @@
-import {CartController} from "../controller/cart.controller.js"
+import { CartController } from "../controller/cart.controller.js"
 
 const cartController = new CartController;
 
@@ -23,6 +23,8 @@ export class CartView {
         li.innerText = `${i + 1}. Cat: ${array[i].color}, name - ${array[i].name}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
       }
       let but = button.cloneNode(true);
+      but.children[0].setAttribute('data-cancel-one', 'no');
+      but.children[0].addEventListener('click', (e) => {this.deleteOne(e, array[i])})
       li.appendChild(but);
       ul.appendChild(li);
     }
@@ -54,6 +56,11 @@ export class CartView {
   cancel(e){
     cartController.cancelBuying();
     e.target.setAttribute('data-cancel', 'yes');
+  }
+
+  deleteOne(e, element){
+    cartController.cancelOne(element);
+    e.target.setAttribute('data-cancel-one', 'yes');
   }
 }
 

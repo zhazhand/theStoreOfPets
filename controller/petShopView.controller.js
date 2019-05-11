@@ -1,4 +1,4 @@
-import {Helper} from "../services/helper.service.js"
+import { Helper } from "../helper/helper.js"
 
 let helper = new Helper;
 

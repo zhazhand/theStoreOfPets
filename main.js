@@ -1,10 +1,10 @@
-import {PetShop} from "./model/petShop.model.js";
-import {Banner} from "./view/banner.view.js";
-import {DogCategory} from "./view/categoryDogs.view.js";
-import {CatCategory} from "./view/categoryCat.view.js";
-import {HamsterCategory} from "./view/categoryHamster.view.js";
-import {FormView} from "./view/form.view.js";
-import {CartView} from "./view/cart.view.js";
+import { PetShop } from "./model/petShop.model.js";
+import { Banner } from "./view/banner.view.js";
+import { DogCategory } from "./view/categoryDogs.view.js";
+import { CatCategory } from "./view/categoryCat.view.js";
+import { HamsterCategory } from "./view/categoryHamster.view.js";
+import { FormView } from "./view/form.view.js";
+import { CartView } from "./view/cart.view.js";
 
 const banner = new Banner;
 const petShop = new PetShop;
@@ -77,6 +77,7 @@ function watchAttributes(e){
 }
 
 function watchCart(e){
+  let scoreText = +cartScore.innerText;
   if(e.target.getAttribute('data-sold') === 'yes'){
     cartScore.innerText = '';
     hideAndShowCart();
@@ -86,6 +87,12 @@ function watchCart(e){
     cartScore.innerText = '';
     hideAndShowCart();
     e.target.parentElement.parentElement.firstElementChild.innerHTML = '';
+    banner.render();
+  }
+  if(e.target.getAttribute('data-cancel-one') === 'yes'){
+    let newScore = scoreText - 1;
+    cartScore.innerText = (newScore === 0) ? '' : newScore;alert(e.target.parentElement.parentElement.innerHtml)
+    e.target.parentElement.parentElement.innerHtml = '';
     banner.render();
   }
 }

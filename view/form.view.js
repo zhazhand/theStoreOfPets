@@ -1,7 +1,7 @@
-import {Helper} from "../services/helper.service.js"
-import {Cat} from "../model/cat.model.js"
-import {Dog} from "../model/dog.model.js"
-import {Hamster} from "../model/hamster.model.js"
+import { Helper } from "../helper/helper.js"
+import { Cat } from "../model/cat.model.js"
+import { Dog } from "../model/dog.model.js"
+import { Hamster } from "../model/hamster.model.js"
 
 const helper = new Helper;
 

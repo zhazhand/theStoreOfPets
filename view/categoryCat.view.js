@@ -1,4 +1,4 @@
-import {CatController} from "../controller/categoryCat.controller.js"
+import { CatController } from "../controller/categoryCat.controller.js"
 import { DogCategory } from "./categoryDogs.view.js";
 
 const controller = new CatController;

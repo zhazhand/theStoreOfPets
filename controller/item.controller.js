@@ -7,12 +7,12 @@ export class ItemController{
     return pet;
   }
   defineType(element){
-    if(element.name && !element.fluffy){
-      element.type = 'dog';
-    } else if(element.name && element.fluffy){
-      element.type = 'cat';
-    } else {
+    if(!element.name){
       element.type = 'hamster';
+    } else if(!element.isFluffy){
+      element.type = 'dog';
+    } else {
+      element.type = 'cat';
     }
     return element.type;
   }

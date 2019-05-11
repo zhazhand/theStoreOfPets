@@ -1,5 +1,5 @@
-import {DogController} from "../controller/categoryDog.controller.js"
-import {ItemView} from "../view/item.view.js"
+import { DogController } from "../controller/categoryDog.controller.js"
+import { ItemView } from "../view/item.view.js"
 
 const controller = new DogController;
 const itemView = new ItemView;
