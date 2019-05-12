@@ -52,8 +52,7 @@ export class MainController {
     }
   }
 
-  showCart(element){
-    element.classList.toggle('invis');
+  showCart(){
     cartView.render();
   }
 

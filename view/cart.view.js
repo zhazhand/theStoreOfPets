@@ -4,14 +4,37 @@ const cartController = new CartController;
 
 export class CartView {
 constructor(){
-  this.container = document.querySelector('.cartContainer');
+  this.container = document.querySelector('.viewContainer');
 }
 
   render(){
+    let overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    let flexContainer = document.createElement('div');
+    flexContainer.setAttribute('class', 'd-flex justify-content-center h-100');
+    overlay.appendChild(flexContainer);
+    let card = document.createElement('div');
+    card.setAttribute('class', 'card align-self-center');
+    flexContainer.appendChild(card);
+    let cardHeader = document.createElement('div');
+    cardHeader.setAttribute('class', 'card-header position-relative');
+    cardHeader.innerText = ' In your cart';
+    card.appendChild(cardHeader);
+    let closeButton = document.createElement('button');
+    closeButton.setAttribute('class', 'cart-over position-absolute h-100');
+    closeButton.addEventListener('click', () => {cartController.closeCart()})
+    cardHeader.appendChild(closeButton);
+    let closeImg = document.createElement('img');
+    closeImg.setAttribute('src', './assets/close.png');
+    closeImg.classList.add('h-75');
+    closeButton.appendChild(closeImg);
     const array = cartController.getAll();
     let mainDiv = document.createElement('div');
+    mainDiv.setAttribute('class', 'card-body cartContainer');
+    card.appendChild(mainDiv);
+    this.container.appendChild(overlay);
     if (array.length === 0){
-      return this.container.innerHtml = '';
+      return mainDiv.innerHtml = '';
     }
     let button = document.createElement('button');
     button.setAttribute('class', 'delItem h-100');
@@ -24,11 +47,11 @@ constructor(){
     for (let i = 0; i < array.length; i++) {
       let li = document.createElement('li');
       if(!array[i].name){
-        li.innerText = `${i + 1}. Hamster: ${array[i].color}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
+        li.innerText = `Hamster: ${array[i].color}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
       } else if(!array[i].isFluffy){
-        li.innerText = `${i + 1}. Dog: ${array[i].color}, name - ${array[i].name}, ${array[i].price}$`;
+        li.innerText = `Dog: ${array[i].color}, name - ${array[i].name}, ${array[i].price}$`;
       } else {
-        li.innerText = `${i + 1}. Cat: ${array[i].color}, name - ${array[i].name}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
+        li.innerText = `Cat: ${array[i].color}, name - ${array[i].name}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
       }
       let but = button.cloneNode(true);
       but.children[0].addEventListener('click', (e) => {cartController.cancelOne(e, array[i].id)})
@@ -49,7 +72,7 @@ constructor(){
     but2.addEventListener('click', () => {cartController.cancelBuying()})
     div.appendChild(but2);
     mainDiv.appendChild(div);
-    return this.container.appendChild(mainDiv);
+    return overlay;
   }
 
 }

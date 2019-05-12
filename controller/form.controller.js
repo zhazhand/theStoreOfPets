@@ -77,17 +77,19 @@ export class FormController {
   }
 
   isValid(element, pat = true){
+    let tmpValue;
     let pattern = pat ? /^[a-z]+-?([a-z]+)?$/i : /^\d+(\.\d{0,2})?$/;
     if(element.value !== '' && pattern.test(element.value)){
       return true;
     }else {
       element.style.border = '3px solid red';
       element.style.color = 'red';
-      element.value = ' PLEASE, FILL THIS FIELD!';
+      tmpValue = element.value;
+      element.value = ' PLEASE, FILL THIS FIELD CORRECTLY!';
       setTimeout(() => {
         element.style.border = '';
         element.style.color = '';
-        element.value = '';
+        element.value = tmpValue;
       }, 2000);
       return false;
     }
