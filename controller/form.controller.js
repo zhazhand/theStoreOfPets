@@ -22,22 +22,6 @@ export class FormController {
     }
   }
   
-  validText(e) {
-    let str = e.target.value;
-    const pattern = /^[a-z]+-?([a-z]+)?$/i;
-    if (!pattern.test(str)) {
-      return e.target.value = str.slice(0, -1);
-    }
-  }
-
-  validPrice(e) {
-    let str = e.target.value;
-    const pattern = /^\d+(\.\d{0,2})?$/;
-    if (!pattern.test(str)) {
-      return e.target.value = str.slice(0, -1);
-    }
-  }
-  
 
   sendData(sel1,sel2,inp1,inp2,inp3){
     let color = inp1.value.toLowerCase();
@@ -76,9 +60,9 @@ export class FormController {
     this.closeForm();
   }
 
-  isValid(element, pat = true){
+  isValid(element, patrn = true){
     let tmpValue;
-    let pattern = pat ? /^[a-z]+-?([a-z]+)?$/i : /^\d+(\.\d{0,2})?$/;
+    let pattern = patrn ? /^[a-z]+-?([a-z]+)?$/i : /^\d+(\.\d{0,2})?$/;
     if(element.value !== '' && pattern.test(element.value)){
       return true;
     }else {

@@ -10,9 +10,9 @@ export class PetShopController {
   delete(index) {
     this.list.splice(index,1);
   }
-  getList(){
-    fetch('./assets/pets.json')
-    .then(response => response.json())
-    .then(data => {sessionStorage.setItem('allPets',JSON.stringify(data))});
+  async getList(){
+    const response = await fetch('./assets/pets.json');
+    const data = await response.json();
+    sessionStorage.setItem('allPets',JSON.stringify(data));
   }
 }
