@@ -7,7 +7,7 @@ constructor(){
   this.container = document.querySelector('.viewContainer');
 }
 
-  render(){
+  render(array){
     let overlay = document.createElement('div');
     overlay.classList.add('overlay');
     let flexContainer = document.createElement('div');
@@ -28,7 +28,6 @@ constructor(){
     closeImg.setAttribute('src', './assets/close.png');
     closeImg.classList.add('h-75');
     closeButton.appendChild(closeImg);
-    const array = cartController.getAll();
     let mainDiv = document.createElement('div');
     mainDiv.setAttribute('class', 'card-body cartContainer');
     card.appendChild(mainDiv);
@@ -54,7 +53,7 @@ constructor(){
         li.innerText = `Cat: ${array[i].color}, name - ${array[i].name}, fur - ${array[i].isFluffy}, ${array[i].price}$`;
       }
       let but = button.cloneNode(true);
-      but.children[0].addEventListener('click', (e) => {cartController.cancelOne(e, array[i].id)})
+      but.addEventListener('click', (e) => {cartController.cancelOne(e, array[i].id)})
       li.appendChild(but);
       ul.appendChild(li);
     }
@@ -64,12 +63,12 @@ constructor(){
     let but1 = document.createElement('button');
     but1.innerText = 'confirm';
     but1.setAttribute('class', 'btn btn-primary btn-sm');
-    but1.addEventListener('click', () => {cartController.confirmBuying()})
+    but1.addEventListener('click', (e) => {cartController.confirmBuying(e)})
     div.appendChild(but1);
     let but2 = document.createElement('button');
     but2.innerText = 'cancel';
     but2.setAttribute('class', 'btn btn-danger btn-sm');
-    but2.addEventListener('click', () => {cartController.cancelBuying()})
+    but2.addEventListener('click', (e) => {cartController.cancelBuying(e)})
     div.appendChild(but2);
     mainDiv.appendChild(div);
     return overlay;

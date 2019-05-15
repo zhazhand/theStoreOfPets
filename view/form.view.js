@@ -4,7 +4,9 @@ import { FormController } from "../controller/form.controller.js"
 const helper = new Helper;
 const controller = new FormController;
 
+
 export class FormView {
+  
   render() {
     let form = document.createElement('div');
     form.classList.add('pb-3');
@@ -41,7 +43,7 @@ export class FormView {
     button.setAttribute('class', 'btn btn-primary mr-2');
     button.innerText = 'Add animal';
     button.addEventListener('click', () => {
-      controller.sendData(select1, select2, input1, input2, input3);
+      controller.sendData(select1, input1, input2, input3);
     });
     div2.appendChild(button);
     let button2 = document.createElement('button');

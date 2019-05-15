@@ -1,10 +1,3 @@
-import { Cat } from "../model/cat.model.js"
-import { Dog } from "../model/dog.model.js"
-import { Hamster } from "../model/hamster.model.js"
-import { Banner } from "../view/banner.view.js"
-
-const banner = new Banner;
-
 export class FormController {
   constructor(){
     this.parent = document.querySelector('.viewContainer');
@@ -23,41 +16,29 @@ export class FormController {
   }
   
 
-  sendData(sel1,sel2,inp1,inp2,inp3){
-    let color = inp1.value.toLowerCase();
-    let price = inp2.value;
-    let tmp = inp3.value;
-    let name = tmp.slice(0, 1).toUpperCase() + tmp.slice(1).toLowerCase();
-    let fur = sel2.value.toLowerCase();
+  sendData(sel1,inp1,inp2,inp3){
+    let button = this.parent.querySelector('button.btn-primary');
+    button.removeAttribute('data-send');
     let item;
     switch (sel1.value) {
         case 'dog':
-        if(this.isValid(inp1) && this.isValid(inp2, false) && this.isValid(inp3)){
-          item = new Dog(color, price, name);
-        }else {
+        if(!this.isValid(inp1) || !this.isValid(inp2, false) || !this.isValid(inp3)){
           return;
         }
         break;
       case 'cat':
-        if(this.isValid(inp1) && this.isValid(inp2, false) && this.isValid(inp3)){  
-          item = new Cat(color, price, name, fur);
-        }else {
+        if(!this.isValid(inp1) || !this.isValid(inp2, false) || !this.isValid(inp3)){
           return;
         }
         break;
       case 'hamster':
-        if(this.isValid(inp1) && this.isValid(inp2, false)){  
-          item = new Hamster(color, price, fur);
-        }else {
+        if(!this.isValid(inp1) || !this.isValid(inp2, false)){
           return;
         }
         break;
     }
-    let array = JSON.parse(sessionStorage.getItem('allPets')) ? JSON.parse(sessionStorage.getItem('allPets')) : [];
-    array.push(item);
-    sessionStorage.setItem('allPets', JSON.stringify(array));
-    banner.render();
-    this.closeForm();
+    button.setAttribute('data-send','data');
+    return item;
   }
 
   isValid(element, patrn = true){

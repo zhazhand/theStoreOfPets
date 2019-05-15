@@ -9,17 +9,17 @@ export class Banner{
     this.fluffyOrWhiteContainer = document.querySelectorAll('table td')[2];
   }
 
-  render(){
+  render(list){
     this.catsContainer.innerHTML = '';
-    this.catsContainer.appendChild(this.getCats());
+    this.catsContainer.appendChild(this.getCats(list));
     this.greaterThanAverageContainer.innerHTML = '';
-    this.greaterThanAverageContainer.appendChild(this.getGreaterThenAverage());
+    this.greaterThanAverageContainer.appendChild(this.getGreaterThenAverage(list));
     this.fluffyOrWhiteContainer.innerHTML = '';
-    this.fluffyOrWhiteContainer.appendChild(this.getFluffyOrWhite());
+    this.fluffyOrWhiteContainer.appendChild(this.getFluffyOrWhite(list));
   }
 
-  getCats(){
-    let data = controller.define().cats;
+  getCats(list){
+    let data = controller.define(list).cats;
     let parent = document.createElement('ol');
     for (let i = 0; i < data.length; i++) {
       let el = data[i];
@@ -30,8 +30,8 @@ export class Banner{
     return parent;
   }
   
-  getGreaterThenAverage(){
-    let data = controller.define().priceGreaterAverage;
+  getGreaterThenAverage(list){
+    let data = controller.define(list).priceGreaterAverage;
     let parent = document.createElement('ol');
     for (let i = 0; i < data.length; i++) {
       let el = data[i];
@@ -50,8 +50,8 @@ export class Banner{
     return parent;
   }
   
-  getFluffyOrWhite(){
-    let data = controller.define().fluffy;
+  getFluffyOrWhite(list){
+    let data = controller.define(list).fluffy;
     let parent = document.createElement('ol');
     for (let i = 0; i < data.length; i++) {
       let el = data[i];

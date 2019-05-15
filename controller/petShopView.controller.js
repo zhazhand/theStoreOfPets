@@ -1,32 +1,28 @@
 import { Helper } from "../helper/helper.js"
+import { Cat } from "../model/cat.model.js";
 
-let helper = new Helper;
+const helper = new Helper;
 
 export class PetShopView {
 
-  define() {
+  define(data) {
     let result = {};
-    this.animals = JSON.parse(sessionStorage.getItem('allPets'));
+    this.animals = data;
     result.cats = this.getCats(this.animals);
     result.fluffy = this.getWhiteOrFluffy(this.animals);
     result.priceGreaterAverage = this.getPriceGreater(this.animals);
     return result;
   }
+  
   getCats(array) {
-
-    let cats = array.filter(elem => elem.isFluffy && elem.name);
-    return cats;
+    return array.filter(elem => elem instanceof Cat);
   }
 
   getWhiteOrFluffy(array) {
-
-    let fluffy = array.filter(elem => elem.isFluffy === 'long' || elem.color === 'white');
-    return fluffy;
+    return array.filter(elem => elem.isFluffy === 'long' || elem.color === 'white');
   }
 
   getPriceGreater(array) {
-
-    let priceAv = array.filter(elem => elem.price > helper.average(this.animals));
-    return priceAv;
+    return array.filter(elem => elem.price > helper.average(this.animals));
   }
 }
