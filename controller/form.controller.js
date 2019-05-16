@@ -55,7 +55,7 @@ export class FormController {
         element.style.border = '';
         element.style.color = '';
         element.value = tmpValue;
-      }, 2000);
+      }, 700);
       return false;
     }
   }
