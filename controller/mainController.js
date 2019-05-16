@@ -81,7 +81,7 @@ export class MainController {
   }
 
   addPet(type, fur, color, price, name){
-    let newName = name[0].toUpperCase() + name.slice(1).toLowerCase();
+    let newName = name ? name[0].toUpperCase() + name.slice(1).toLowerCase() : '';
     let item;
     if(type === 'dog'){
       item = new Dog(color, price, newName);
