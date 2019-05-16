@@ -56,7 +56,9 @@ export class Banner{
     for (let i = 0; i < data.length; i++) {
       let el = data[i];
       let element = document.createElement('li');
-      element.innerHTML = el.name?`Cat: ${el.color}, ${el.price}$`:`Hamster: ${el.color}, ${el.price}$`;
+      let tmp = el.type;
+      tmp = tmp.slice(0, 1).toUpperCase() + tmp.slice(1);
+      element.innerHTML = `${tmp}: ${el.color}, ${el.price}$`;
       parent.appendChild(element);
     }
     return parent;
